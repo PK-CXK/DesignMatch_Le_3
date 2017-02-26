@@ -1,5 +1,6 @@
 package com.example.designmatch_le_3;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,14 +19,14 @@ import android.view.MenuItem;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps2d.*;
 import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.MyLocationStyle;
-import com.example.designmatch_le_3.R;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
+import com.example.designmatch_le_3.contact.contact;
+import com.example.designmatch_le_3.contact.nonecontact;
 
 //import com.amap.api.maps.*;
 
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity
     private AMapLocationClientOption mLocationOption;
     private SmsManager sms=SmsManager.getDefault();
     private String phonenumber="13225632326";
+    private static boolean num_empty=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,17 +203,29 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_camera)
+        {
+                Intent nonecontactintent=new Intent(MainActivity.this,contact.class);
+                startActivity(nonecontactintent);
+        }
+        else if (id == R.id.nav_gallery)
+        {
 
-        } else if (id == R.id.nav_slideshow) {
+        }
+        else if (id == R.id.nav_slideshow)
+        {
 
-        } else if (id == R.id.nav_manage) {
+        }
+        else if (id == R.id.nav_manage)
+        {
 
-        } else if (id == R.id.nav_share) {
+        }
+        else if (id == R.id.nav_share)
+        {
 
-        } else if (id == R.id.nav_send) {
+        }
+        else if (id == R.id.nav_send)
+        {
 
         }
 
