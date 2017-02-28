@@ -1,6 +1,7 @@
 package com.example.designmatch_le_3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity
     private AMapLocationClientOption mLocationOption;
     private SmsManager sms=SmsManager.getDefault();
     private String phonenumber="13225632326";
-    private static boolean num_empty=false;
 
 
     @Override
@@ -205,8 +205,18 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera)
         {
-                Intent nonecontactintent=new Intent(MainActivity.this,contact.class);
+            SharedPreferences b=getSharedPreferences("contact_data",MODE_PRIVATE);
+            boolean a=b.getBoolean("contact_empty",true);
+            if(a==false)
+            {
+                Intent contactintent=new Intent(MainActivity.this,contact.class);
+                startActivity(contactintent);
+            }
+            else
+            {
+                Intent nonecontactintent=new Intent(MainActivity.this,nonecontact.class);
                 startActivity(nonecontactintent);
+            }
         }
         else if (id == R.id.nav_gallery)
         {
