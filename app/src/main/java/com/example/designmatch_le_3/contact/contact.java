@@ -42,6 +42,7 @@ public class contact extends AppCompatActivity {
     public static String contact_name;
     public static String contact_number;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +111,7 @@ public class contact extends AppCompatActivity {
     private OnItemClickListener onItemClickListener = new OnItemClickListener() {
         @Override
         public void onItemClick(int position) {
-            Toast.makeText(mContext, "我是第" + position + "条。", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "滑动菜单", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -129,26 +130,39 @@ public class contact extends AppCompatActivity {
         public void onItemClick(Closeable closeable, int adapterPosition, int menuPosition, int direction) {
             closeable.smoothCloseMenu();// 关闭被点击的菜单。
 
-            if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION) {
+            /*if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION) {
                 Toast.makeText(mContext, "list第" + adapterPosition + "; 右侧菜单第" + menuPosition, Toast.LENGTH_SHORT).show();
             } else if (direction == SwipeMenuRecyclerView.LEFT_DIRECTION) {
                 Toast.makeText(mContext, "list第" + adapterPosition + "; 左侧菜单第" + menuPosition, Toast.LENGTH_SHORT).show();
-            }
+            }*/
 
             // TODO 如果是删除：推荐调用Adapter.notifyItemRemoved(position)，不推荐Adapter.notifyDataSetChanged();
             if (menuPosition == 0) {// 删除按钮被点击。
-                mStrings.remove(adapterPosition);
-                mMenuAdapter.notifyItemRemoved(adapterPosition);
+                SharedPreferences c=getSharedPreferences("contact_data",MODE_PRIVATE);
+                SharedPreferences.Editor e=c.edit();
+                e.putBoolean("contact_empty",true);
+                e.commit();
+                Intent tomainintent=new Intent(contact.this,MainActivity.class);
+                startActivity(tomainintent);
+                finish();
+                /*mStrings.remove(adapterPosition);
+                mMenuAdapter.notifyItemRemoved(adapterPosition);*/
+            }
+            else if (menuPosition==1)
+            {
+                Intent tonone=new Intent(contact.this,nonecontact.class);
+                startActivity(tonone);
             }
         }
     };
 
-    /*@Override
+    /*右上角无用按钮
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_all_activity, menu);
         return true;
     }
-右上角无用按钮*/
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
